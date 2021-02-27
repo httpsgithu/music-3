@@ -71,6 +71,7 @@ before_install:
   - sh -c "if [ '$CLOUD' = 'owncloud' ]; then git clone https://github.com/owncloud/core.git --recursive --depth 1 -b $CORE_BRANCH core; fi;"
   - cd core
   - git submodule update --init
+  - mkdir data
   # On ownCloud 10.x, we need to run 'make'. Furthermore, the Makefile is not totally compatible
   # with our Travis environment and has to be patched slightly.
   - sh -c "if [ '$CLOUD' = 'owncloud' ] && [ $CORE_BRANCH = 'stable10' -o $CORE_BRANCH = 'master' ]; then sed -i 's/php \$(COMPOSER_BIN)/\$(COMPOSER_BIN)/g' Makefile; make; fi;"
@@ -79,7 +80,7 @@ before_install:
 
 before_script:
   # setup ownCloud
-  - php -f core/occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass='' -vvv
+  - php -f core/occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
   - php -f core/occ app:enable music
   - php -f core/occ user:add ampache --password-from-env
   # download test data (only if not cached already)
