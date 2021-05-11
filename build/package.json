@@ -20,7 +20,7 @@
 		"javascript-detect-element-resize": "^0.5.3",
 		"jquery": "^3.5.1",
 		"js-cookie": "^2.2.1",
-		"lodash": "^4.17.20",
+		"lodash": "^4.17.21",
 		"restangular": "^1.6.1"
 	},
 	"devDependencies": {
